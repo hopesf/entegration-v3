@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Checkbox } from "./ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 
 export default function FilterSide() {
   const mainCategorys = [
@@ -50,20 +51,38 @@ export default function FilterSide() {
     { title: "Hardal", value: "mustard" },
   ];
 
-  const renderFilter = (data: any[], sideTitle: string) => {
-    return (
-      <div className="grid w-full max-w-sm items-center gap-1.5 space-y-4 pt-4">
-        <Label htmlFor="searchInFilter">{sideTitle}</Label>
-        {data?.map((item) => (
-          <div className="flex items-center space-x-2 px-2 font-medium" key={item.title}>
-            <Checkbox id={item.title} />
-            <label htmlFor={item.value} className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              {item.title}
-            </label>
-          </div>
-        ))}
-      </div>
-    );
+  const renderFilter = (data: any[], sideTitle: string, renderType: string = "checkbox") => {
+    if (renderType === "checkbox") {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5 space-y-4 pt-4">
+          <Label htmlFor="searchInFilter">{sideTitle}</Label>
+          {data?.map((item) => (
+            <div className="flex items-center space-x-2 px-2 font-medium" key={item.title}>
+              <Checkbox id={item.title} />
+              <label htmlFor={item.value} className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                {item.title}
+              </label>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (renderType === "radio") {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5 space-y-4 pt-4">
+          <Label htmlFor="searchInFilter">{sideTitle}</Label>
+          <RadioGroup defaultValue="comfortable" className="space-y-2 px-2 font-medium">
+            {data?.map((item) => (
+              <div key={item.title} className="flex items-center space-x-4">
+                <RadioGroupItem value={item.value} id={item.title} />
+                <Label htmlFor={item.title}>{item.title}</Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+      );
+    }
   };
 
   return (
@@ -89,7 +108,7 @@ export default function FilterSide() {
         </div>
 
         {/* stok durumu */}
-        {renderFilter(stockStatus, "Stok Durumu")}
+        {renderFilter(stockStatus, "Stok Durumu", "radio")}
 
         {/* Ana kategori */}
         {renderFilter(mainCategorys, "Ana Kategori")}

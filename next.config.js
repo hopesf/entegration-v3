@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["picsum.photos"],
+    domains: ["czbucket-cz.s3.eu-central-1.amazonaws.com"],
   },
 };
 
