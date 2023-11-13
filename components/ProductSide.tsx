@@ -11,7 +11,7 @@ export default function ProductSide() {
 
   const renderProductCard = () => {
     return (
-      <div className="min-w-fit flex space-y-2 flex-col pb-5 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] shadow-blue-500/20">
+      <div className="min-w-fit flex space-y-2 flex-col pb-5 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] shadow-blue-500/20  rounded-bl-2xl rounded-br-2xl">
         <Image
           src="https://czbucket-cz.s3.eu-central-1.amazonaws.com/wp-content/uploads/2022/11/03024542/12888.jpg"
           width={800}
@@ -38,7 +38,11 @@ export default function ProductSide() {
         </div>
 
         <div className="flex items-center justify-center w-full pt-5">
-          <Link href={"/"} className="w-fit dark:bg-black flex items-center dark:text-white hover:border-b hover:border-red-500">
+          <Link
+            href={`/product/1?merchant=${selectedMerchant}`}
+            target="_blank"
+            className="w-fit dark:bg-black flex items-center dark:text-white hover:border-b hover:border-red-500"
+          >
             <ArrowRight className="mr-2 h-4 w-4" /> Ürüne Git
           </Link>
         </div>
@@ -47,7 +51,7 @@ export default function ProductSide() {
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <div className="border p-5 rounded w-full flex items-center justify-between">
         <div>
           <span className="text-lg font-bold">Ürünler</span>
@@ -59,8 +63,8 @@ export default function ProductSide() {
               <SelectValue placeholder="Ürünleri Sırala" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="minModelCode">En Düşük Modelkodu</SelectItem>
-              <SelectItem value="maxModelCode">En Yüksek Modelkodu</SelectItem>
+              <SelectItem value="minModelCode">En Düşük Model Kodu</SelectItem>
+              <SelectItem value="maxModelCode">En Yüksek Model Kodu</SelectItem>
               <SelectItem value="minPrice">En Düşük Fiyat</SelectItem>
               <SelectItem value="maxPrice">En Yüksek Fiyat</SelectItem>
             </SelectContent>

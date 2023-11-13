@@ -12,8 +12,13 @@ function globalReducer(state: typeof initialState, action: { type: string; paylo
         ...state,
         merchants: state.merchants.map((merchant) => ({
           ...merchant,
-          selected: merchant.title === action.payload,
+          selected: merchant.merchant === action.payload.toLowerCase(),
         })),
+      };
+    case "setPageLoader":
+      return {
+        ...state,
+        pageLoader: action.payload,
       };
     default:
       return state;
@@ -27,30 +32,35 @@ const initialState = {
       selected: false,
       merchant: "ozon",
       disabled: false,
+      href: "/ozon",
     },
     {
       title: "Etsy",
       selected: false,
       merchant: "etsy",
       disabled: true,
+      href: "/etsy",
     },
     {
       title: "Joom",
       selected: false,
       merchant: "joom",
       disabled: true,
+      href: "/joom",
     },
     {
       title: "Fruugo",
       selected: false,
       merchant: "fruugo",
       disabled: false,
+      href: "/fruugo",
     },
     {
       title: "Trendyol International",
       selected: false,
       merchant: "trendyolint",
       disabled: true,
+      href: "/trendyolint",
     },
   ],
   data: [
@@ -58,14 +68,17 @@ const initialState = {
       title: "Bildirimler",
       selected: false,
       merchant: null,
+      href: "/notifications",
     },
     {
       title: "Arşiv İşlemleri",
       selected: false,
       merchant: null,
+      href: "#",
       submenu: [
         {
           title: "Arşivlenmiş Ürünler",
+          href: "/archived-products",
           disabled: false,
           shortcut: (
             <MenubarShortcut>
@@ -75,6 +88,7 @@ const initialState = {
         },
         {
           title: "Arşiv Ayarları",
+          href: "/settings",
           disabled: false,
           shortcut: (
             <MenubarShortcut>
@@ -88,13 +102,16 @@ const initialState = {
       title: "Ozon Ürün Ayarları",
       selected: false,
       merchant: "ozon",
+      href: "/ozon/settings",
     },
     {
       title: "Fruugo Ürün Ayarları",
       selected: false,
       merchant: "fruugo",
+      href: "/fruugo/settings",
     },
   ],
+  pageLoader: true,
 };
 
 interface GlobalContextType {
