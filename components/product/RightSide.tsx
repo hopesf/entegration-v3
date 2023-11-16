@@ -4,17 +4,17 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function RightSide() {
   return (
-    <div className="col-span-9 w-full h-full space-y-2 overflow-y-auto">
+    <div className="col-span-9 w-full h-full max-w-screen space-y-4 overflow-y-auto">
       {/* resimlerin renklerinin seçilebileceği container */}
-      <div className="w-fit mx-auto flex space-x-8 border px-5 py-4 rounded-tr-2xl rounded-bl-2xl items-center justify-center shadow">
-        <div className="h-4 w-4 rounded-full bg-red-500" />
-        <div className="h-4 w-4 rounded-full bg-gray-500" />
-        <div className="h-4 w-4 rounded-full bg-yellow-500" />
-        <div className="h-4 w-4 rounded-full bg-pink-500" />
-        <div className="h-4 w-4 rounded-full bg-purple-500" />
-        <div className="h-4 w-4 rounded-full bg-orange-500" />
-        <div className="h-4 w-4 rounded-full bg-blue-500" />
-        <div className="h-4 w-4 rounded-full bg-green-500" />
+      <div className="w-fit mx-auto flex border px-5 py-4 rounded-tr-2xl rounded-bl-2xl items-center justify-center shadow -space-x-1 group">
+        <div className="h-4 w-4 rounded-full bg-red-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />
+        <div className="h-4 w-4 rounded-full bg-gray-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />
+        <div className="h-4 w-4 rounded-full bg-yellow-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />
+        <div className="h-4 w-4 rounded-full bg-pink-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />
+        <div className="h-4 w-4 rounded-full bg-purple-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />
+        <div className="h-4 w-4 rounded-full bg-orange-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />
+        <div className="h-4 w-4 rounded-full bg-blue-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />
+        <div className="h-4 w-4 rounded-full bg-green-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />
       </div>
 
       <div className="w-full grid gap-10 grid-cols-3">
