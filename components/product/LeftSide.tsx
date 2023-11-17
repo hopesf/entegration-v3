@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "../ui/textarea";
 import { useGlobal } from "@/context/GlobalContext";
 import { firstCharToUpperCase } from "@/functions";
+import { Check } from "lucide-react";
 
 export default function LeftSide() {
   const { selectedMerchant } = useGlobal();
@@ -55,15 +56,77 @@ export default function LeftSide() {
 
       <Card>
         <CardHeader>
-          <CardTitle>{selectedMerchant && firstCharToUpperCase(selectedMerchant)} Güncel Durumu</CardTitle>
-          <CardDescription>Ürünün {selectedMerchant}'da ne durumda ?</CardDescription>
+          <CardTitle>{selectedMerchant && firstCharToUpperCase(selectedMerchant)} Renklerin Durumu</CardTitle>
+          <CardDescription>Ürünün renkleri {selectedMerchant}'da yüklenmiş mi ?</CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
-            <div className="grid w-full items-center gap-4 space-y-4">
-              <span>Siyah</span>
+          <div className="grid w-full grid-cols-4 gap-6 items-center">
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <span className="-rotate-45 group-hover:-rotate-90 delay-200 duration-500 text-red-600 font-light">!</span>
+              </div>
+              <span className="group-hover:scale-105 font-light">Siyah</span>
             </div>
-          </form>
+
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <Check size={20} className="text-green-600 -rotate-45 group-hover:-rotate-90 delay-200 duration-500" />
+              </div>
+              <span className="group-hover:scale-105 font-light">Kırmızı</span>
+            </div>
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <span className="-rotate-45 group-hover:-rotate-90 delay-200 duration-500 text-red-600 font-light">!</span>
+              </div>
+              <span className="group-hover:scale-105 font-light">Sarı</span>
+            </div>
+
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <Check size={20} className="text-green-600 -rotate-45 group-hover:-rotate-90 delay-200 duration-500" />
+              </div>
+              <span className="group-hover:scale-105 font-light">Pembe</span>
+            </div>
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <span className="-rotate-45 group-hover:-rotate-90 delay-200 duration-500 text-red-600 font-light">!</span>
+              </div>
+              <span className="group-hover:scale-105 font-light">Mor</span>
+            </div>
+
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <Check size={20} className="text-green-600 -rotate-45 group-hover:-rotate-90 delay-200 duration-500" />
+              </div>
+              <span className="group-hover:scale-105 font-light">Turuncu</span>
+            </div>
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <span className="-rotate-45 group-hover:-rotate-90 delay-200 duration-500 text-red-600 font-light">!</span>
+              </div>
+              <span className="group-hover:scale-105 font-light">Mavi</span>
+            </div>
+
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <Check size={20} className="text-green-600 -rotate-45 group-hover:-rotate-90 delay-200 duration-500" />
+              </div>
+              <span className="group-hover:scale-105 font-light">Gri</span>
+            </div>
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <span className="-rotate-45 group-hover:-rotate-90 delay-200 duration-500 text-red-600 font-light">!</span>
+              </div>
+              <span className="group-hover:scale-105 font-light">Yeşil</span>
+            </div>
+
+            <div className="flex space-x-4 items-center group">
+              <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
+                <Check size={20} className="text-green-600 -rotate-45 group-hover:-rotate-90 delay-200 duration-500" />
+              </div>
+              <span className="group-hover:scale-105 font-light">Lacivert</span>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>

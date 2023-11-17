@@ -1,10 +1,8 @@
 import Image from "next/image";
 
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-
 export default function RightSide() {
   return (
-    <div className="col-span-9 w-full h-full max-w-screen space-y-4 overflow-y-auto">
+    <div className="col-span-6 w-full h-full max-w-screen space-y-4 overflow-y-auto">
       {/* resimlerin renklerinin seçilebileceği container */}
       <div className="w-fit mx-auto flex border px-5 py-4 rounded-tr-2xl rounded-bl-2xl items-center justify-center shadow -space-x-1 group">
         <div className="h-4 w-4 rounded-full bg-red-500 border group-hover:mx-5 duration-500 hover:scale-150 cursor-pointer" />

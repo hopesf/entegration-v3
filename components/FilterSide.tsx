@@ -28,6 +28,12 @@ export default function FilterSide() {
     { title: "Stokta Yok", value: "STOKTA_YOK" },
   ];
 
+  const merchantExist = [
+    { title: "Tümü", value: "TUMU" },
+    { title: "Yüklenenler", value: "yes" },
+    { title: "Yüklenmeyenler", value: "no" },
+  ];
+
   const colors = [
     { title: "Siyah", value: "black" },
     { title: "Beyaz", value: "white" },
@@ -106,6 +112,9 @@ export default function FilterSide() {
             <Input type="text" placeholder="Max" />
           </div>
         </div>
+
+        {/* Yüklenenler yüklenmeyenler */}
+        {renderFilter(merchantExist, "Pazaryeri Durumu", "radio")}
 
         {/* stok durumu */}
         {renderFilter(stockStatus, "Stok Durumu", "radio")}

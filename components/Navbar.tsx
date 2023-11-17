@@ -24,7 +24,7 @@ export default function Navbar() {
   const handleSelectMerchant = (merchantTitle: string) => dispatch({ type: "selectMerchant", payload: merchantTitle });
 
   return (
-    <div className="w-full flex items-center px-2 lg:px-4 py-1 border-b justify-between">
+    <div className="w-full flex items-center px-2 lg:px-4 py-1 border-b justify-between sticky top-0 z-20 bg-white dark:bg-black">
       <Menubar className="rounded-none border-none">
         <Link href={"/"} className={`font-extrabold text-lg select-none cursor-pointer ${isAnimating && "rotate-vert-center"}`}>
           CZ

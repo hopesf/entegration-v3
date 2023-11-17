@@ -7,6 +7,7 @@ import { useEffect } from "react";
 
 import LeftSide from "@/components/product/LeftSide";
 import RightSide from "@/components/product/RightSide";
+import ParameterSide from "@/components/product/ParameterSide";
 
 export default function ProductDetail() {
   // eğer queryden merchant fieldı geliyorsa merchantın selectedini true yapacaz dispatch ile
@@ -36,6 +37,7 @@ export default function ProductDetail() {
         {selectedMerchantisExist ? (
           <div className="w-full grid grid-cols-12 h-full gap-5">
             <LeftSide />
+            <ParameterSide />
             <RightSide />
           </div>
         ) : (

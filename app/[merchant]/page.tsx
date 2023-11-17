@@ -40,7 +40,7 @@ export default function MerchantPage({ params }: { params: { merchant: string } 
       <Navbar />
       <main className={`flex flex-col min-h-screen w-full`}>
         <div className="p-6 w-full grid grid-cols-10 gap-5">
-          <div className="col-span-2 max-h-screen overflow-y-auto sticky top-0">
+          <div className="col-span-2 max-h-screen overflow-y-auto sticky top-12">
             <FilterSide />
           </div>
 
