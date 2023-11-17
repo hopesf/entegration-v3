@@ -31,9 +31,6 @@ Heel Height, cm
 Heel Type
 
 Seçiniz
-HS FEA codes of the EAEU
-
-Seçiniz
 Inner Material
 
 Seçiniz
@@ -134,6 +131,13 @@ Upper Material
       maxLenght: 0,
       required: false,
     },
+    {
+      title: "Type",
+      type: "selectbox",
+      placeholder: "Type",
+      minLenght: 0,
+      maxLenght: 0,
+    },
   ];
 
   return (
@@ -146,14 +150,34 @@ Upper Material
         <CardContent>
           <form>
             <div className="grid w-full items-center gap-4 space-y-4">
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Ürün Başlığı</Label>
-                <Input placeholder="Hakiki erkek deri ayakkabı" />
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Ürün Fiyatı</Label>
-                <Input type="number" placeholder="55" />
-              </div>
+              {parameters.map((parameter, index) => (
+                <>
+                  {parameter.type === "text" ? (
+                    <div className="flex flex-col space-y-1.5">
+                      <Label htmlFor="name">{parameter.title}</Label>
+                      <Input placeholder={parameter.placeholder} />
+                    </div>
+                  ) : parameter.type === "number" ? (
+                    <div className="flex flex-col space-y-1.5">
+                      <Label htmlFor="name">{parameter.title}</Label>
+                      <Input type="number" placeholder={parameter.placeholder} />
+                    </div>
+                  ) : parameter.type === "selectbox" ? (
+                    <div className="flex flex-col space-y-1.5">
+                      <Label htmlFor="name">{parameter.title}</Label>
+                      <Select>
+                        <SelectTrigger id="material">
+                          <SelectValue placeholder={parameter.placeholder} />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          <SelectItem value="hakikideri">Hakiki Deri</SelectItem>
+                          <SelectItem value="sunideri">Suni Deri</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  ) : null}
+                </>
+              ))}
 
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="material">Deri Materyali</Label>
