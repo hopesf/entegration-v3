@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import LeftSide from "@/components/product/LeftSide";
 import RightSide from "@/components/product/RightSide";
 import ParameterSide from "@/components/product/ParameterSide";
+import ChatBot from "@/components/ChatBot";
 
 export default function ProductDetail() {
   // eğer queryden merchant fieldı geliyorsa merchantın selectedini true yapacaz dispatch ile
@@ -46,6 +47,7 @@ export default function ProductDetail() {
           </div>
         )}
       </main>
+      {/* <ChatBot /> */}
     </>
   );
 }

@@ -1,70 +1,13 @@
+import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "../ui/textarea";
 import { useGlobal } from "@/context/GlobalContext";
 import { firstCharToUpperCase } from "@/functions";
 
 export default function ParameterSide() {
   const { selectedMerchant } = useGlobal();
-
-  /* 
-
-Article Code
-Casual Footwear Features
-
-Seçiniz
-Closure Type
-
-Seçiniz
-Collection
-
-Seçiniz
-Commercial Type
-
-Seçiniz
-Foot Length, cm
-0
-Heel Height, cm
-Heel Height, cm
-Heel Type
-
-Seçiniz
-Inner Material
-
-Seçiniz
-Insole length, cm
-
-Seçiniz
-Insole Material
-
-Seçiniz
-Manufacturer Size
-Manufacturer Size
-Material
-
-Seçiniz
-Platform Height, cm
-Platform Height, cm
-Season
-
-Seçiniz
-Shaft Height, cm
-Shaft Height, cm
-Sole Height, cm
-Sole Height, cm
-Sole Material
-
-Seçiniz
-Style
-
-Seçiniz
-Type (Zorunlu)
-
-Seçiniz
-Upper Material
-*/
 
   const parameters = [
     {
@@ -141,7 +84,7 @@ Upper Material
   ];
 
   return (
-    <div className="col-span-3 space-y-8">
+    <div className="col-span-12 sm:col-span-6 2xl:col-span-3 space-y-8">
       <Card>
         <CardHeader>
           <CardTitle>{selectedMerchant && firstCharToUpperCase(selectedMerchant)} Parametreleri</CardTitle>
@@ -151,7 +94,7 @@ Upper Material
           <form>
             <div className="grid w-full items-center gap-4 space-y-4">
               {parameters.map((parameter, index) => (
-                <>
+                <React.Fragment key={index}>
                   {parameter.type === "text" ? (
                     <div className="flex flex-col space-y-1.5">
                       <Label htmlFor="name">{parameter.title}</Label>
@@ -176,7 +119,7 @@ Upper Material
                       </Select>
                     </div>
                   ) : null}
-                </>
+                </React.Fragment>
               ))}
 
               <div className="flex flex-col space-y-1.5">

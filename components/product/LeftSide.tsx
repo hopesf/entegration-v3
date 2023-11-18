@@ -11,7 +11,7 @@ export default function LeftSide() {
   const { selectedMerchant } = useGlobal();
 
   return (
-    <div className="col-span-3 space-y-8">
+    <div className="col-span-12 sm:col-span-6 2xl:col-span-3 space-y-8">
       <Card>
         <CardHeader>
           <CardTitle>Ürün Ayarları</CardTitle>
@@ -60,7 +60,7 @@ export default function LeftSide() {
           <CardDescription>Ürünün renkleri {selectedMerchant}'da yüklenmiş mi ?</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid w-full grid-cols-4 gap-6 items-center">
+          <div className="grid w-full grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 items-center">
             <div className="flex space-x-4 items-center group">
               <div className="w-5 h-5 bg-secondary border shadow rotate-45 group-hover:rotate-90 duration-300 flex items-center justify-center">
                 <span className="-rotate-45 group-hover:-rotate-90 delay-200 duration-500 text-red-600 font-light">!</span>
