@@ -1,94 +1,122 @@
+import { useEffect, useState, ChangeEvent } from "react";
 import { Filter } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Checkbox } from "./ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { usePathname, useSearchParams } from "next/navigation";
+
+interface FilterItem {
+  title: string;
+  value: string;
+}
+
+interface FilterGroup {
+  [key: string]: FilterItem[];
+}
 
 export default function FilterSide() {
-  const mainCategorys = [
-    { title: "Kadın", value: "KADIN" },
-    { title: "Erkek", value: "ERKEK" },
-  ];
+  const pathname = usePathname();
+  const searchParams = useSearchParams()!;
 
-  const subCategorys = [
-    { title: "Sneaker", value: "SNEAKER" },
-    { title: "Spor Ayakkabı", value: "SPOR_AYAKKABI" },
-    { title: "Terlik", value: "TERLIK" },
-    { title: "Bot", value: "BOT" },
-    { title: "Çizme", value: "CIZME" },
-    { title: "Sandalet", value: "SANDALET" },
-    { title: "Babet", value: "BABET" },
-  ];
+  const createQueryString = (name: string, value: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set(name, value);
+    return params.toString();
+  };
 
-  const stockStatus = [
-    { title: "Tümü", value: "TUMU" },
-    { title: "Stokta Var", value: "STOKTA_VAR" },
-    { title: "Stokta Yok", value: "STOKTA_YOK" },
-  ];
+  const filters: FilterGroup = {
+    mainCategorys: [
+      { title: "Kadın", value: "KADIN" },
+      { title: "Erkek", value: "ERKEK" },
+    ],
+    subCategorys: [
+      { title: "Sneaker", value: "SNEAKER" },
+      { title: "Spor Ayakkabı", value: "SPOR_AYAKKABI" },
+      { title: "Terlik", value: "TERLIK" },
+      { title: "Bot", value: "BOT" },
+      { title: "Çizme", value: "CIZME" },
+      { title: "Sandalet", value: "SANDALET" },
+      { title: "Babet", value: "BABET" },
+    ],
+    stockExist: [
+      { title: "Tümü", value: "all" },
+      { title: "Stokta Var", value: "on" },
+      { title: "Stokta Yok", value: "off" },
+    ],
+    merchantExist: [
+      { title: "Tümü", value: "all" },
+      { title: "Yüklenenler", value: "on" },
+      { title: "Yüklenmeyenler", value: "off" },
+    ],
+    colors: [
+      { title: "Siyah", value: "black" },
+      { title: "Beyaz", value: "white" },
+      { title: "Kırmızı", value: "red" },
+      { title: "Mavi", value: "blue" },
+      { title: "Yeşil", value: "green" },
+      { title: "Mor", value: "purple" },
+      { title: "Turuncu", value: "orange" },
+      { title: "Pembe", value: "pink" },
+      { title: "Gri", value: "gray" },
+      { title: "Sarı", value: "yellow" },
+      { title: "Kahverengi", value: "brown" },
+      { title: "Bej", value: "beige" },
+      { title: "Lacivert", value: "navy" },
+      { title: "Bordo", value: "burgundy" },
+      { title: "Ekru", value: "ecru" },
+      { title: "Lila", value: "lilac" },
+      { title: "Somon", value: "salmon" },
+      { title: "Krem", value: "cream" },
+      { title: "Saks", value: "saks" },
+      { title: "Hardal", value: "mustard" },
+    ],
+  };
 
-  const merchantExist = [
-    { title: "Tümü", value: "TUMU" },
-    { title: "Yüklenenler", value: "yes" },
-    { title: "Yüklenmeyenler", value: "no" },
-  ];
+  const handleRedirectSelected = (queryName: string, queryValue: string) => {
+    const queryString = createQueryString(queryName, queryValue);
+    window.location.href = pathname + (queryString === "" ? "" : `?${queryString}`);
+  };
 
-  const colors = [
-    { title: "Siyah", value: "black" },
-    { title: "Beyaz", value: "white" },
-    { title: "Kırmızı", value: "red" },
-    { title: "Mavi", value: "blue" },
-    { title: "Yeşil", value: "green" },
-    { title: "Mor", value: "purple" },
-    { title: "Turuncu", value: "orange" },
-    { title: "Pembe", value: "pink" },
-    { title: "Gri", value: "gray" },
-    { title: "Sarı", value: "yellow" },
-    { title: "Kahverengi", value: "brown" },
-    { title: "Bej", value: "beige" },
-    { title: "Lacivert", value: "navy" },
-    { title: "Bordo", value: "burgundy" },
-    { title: "Ekru", value: "ecru" },
-    { title: "Lila", value: "lilac" },
-    { title: "Somon", value: "salmon" },
-    { title: "Krem", value: "cream" },
-    { title: "Saks", value: "saks" },
-    { title: "Hardal", value: "mustard" },
-  ];
+  // jsx
+  const renderFilter = (data: FilterItem[], sideTitle: string, queryName: string) => {
+    const selectedValue = searchParams.get(queryName);
+    const sortedData = sortSelectedToTop(data, selectedValue);
 
-  const renderFilter = (data: any[], sideTitle: string, renderType: string = "checkbox") => {
-    if (renderType === "checkbox") {
-      return (
-        <div className="grid w-full max-w-sm items-center gap-1.5 space-y-4 pt-4">
-          <Label htmlFor="searchInFilter">{sideTitle}</Label>
-          {data?.map((item) => (
-            <div className="flex items-center space-x-2 px-2 font-medium" key={item.title}>
-              <Checkbox id={item.title} />
-              <label htmlFor={item.value} className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                {item.title}
-              </label>
+    return (
+      <div className="w-full">
+        <Label>{sideTitle}</Label>
+        <div className="max-h-[200px] overflow-y-auto gap-1.5 grid max-w-sm pt-4 space-y-4 items-center">
+          {sortedData.map((item, i) => (
+            <div className="flex items-center space-x-2 px-2 font-medium" key={i}>
+              <Checkbox
+                id={item.title}
+                name={item.title}
+                onCheckedChange={(isChecked) => handleRedirectSelected(queryName, isChecked ? item.value : "")}
+                defaultChecked={selectedValue === item.value}
+              />
+              <label className="text-sm leading-none">{item.title}</label>
             </div>
           ))}
         </div>
-      );
+      </div>
+    );
+  };
+
+  // Function to sort the selected value to the top
+  const sortSelectedToTop = (data: FilterItem[], selectedValue: string | null) => {
+    if (!selectedValue) {
+      return data;
     }
 
-    if (renderType === "radio") {
-      return (
-        <div className="grid w-full max-w-sm items-center gap-1.5 space-y-4 pt-4">
-          <Label htmlFor="searchInFilter">{sideTitle}</Label>
-          <RadioGroup defaultValue="comfortable" className="space-y-2 px-2 font-medium">
-            {data?.map((item) => (
-              <div key={item.title} className="flex items-center space-x-4">
-                <RadioGroupItem value={item.value} id={item.title} />
-                <Label htmlFor={item.title}>{item.title}</Label>
-              </div>
-            ))}
-          </RadioGroup>
-        </div>
-      );
+    const selectedIndex = data.findIndex((item) => item.value === selectedValue);
+    if (selectedIndex === -1) {
+      return data;
     }
+
+    const selected = data.splice(selectedIndex, 1);
+    return [...selected, ...data];
   };
 
   return (
@@ -100,39 +128,94 @@ export default function FilterSide() {
       <CardContent className="grid gap-4 p-5 space-y-4">
         {/* filtrede ara */}
         <div className="grid w-full max-w-sm items-center space-y-2">
-          <Label htmlFor="searchInFilter">Ara</Label>
+          <Label>Ara</Label>
           <Input type="text" placeholder="Filtrede Arama Yapabilirsiniz." />
         </div>
 
-        {/* fiyat aralığı */}
-        <div className="grid w-full max-w-sm items-center space-y-2 pt-4">
-          <Label htmlFor="searchInFilter">Fiyat Aralığı</Label>
-          <div className="flex items-center space-x-2">
-            <Input type="text" placeholder="Min" />
-            <Input type="text" placeholder="Max" />
-          </div>
-        </div>
-
         {/* Yüklenenler yüklenmeyenler */}
-        {renderFilter(merchantExist, "Pazaryeri Durumu", "radio")}
+        {renderFilter(filters.merchantExist, "Pazaryeri Durumu", "merchantStatus")}
 
         {/* stok durumu */}
-        {renderFilter(stockStatus, "Stok Durumu", "radio")}
+        {renderFilter(filters.stockExist, "Stok Durumu", "stock")}
 
         {/* Ana kategori */}
-        {renderFilter(mainCategorys, "Ana Kategori")}
+        {renderFilter(filters.mainCategorys, "Ana Kategori", "kata1")}
 
         {/* alt Kategori */}
-        {renderFilter(subCategorys, "Alt Kategori")}
+        {renderFilter(filters.subCategorys, "Alt Kategori", "kata3")}
 
         {/* renk */}
-        {renderFilter(colors, "Renk")}
+        {renderFilter(filters.colors, "Renk", "color")}
       </CardContent>
-      <CardFooter>
-        <Button className="w-full">
-          <Filter className="mr-2 h-4 w-4" /> Filtrele
-        </Button>
-      </CardFooter>
     </Card>
   );
 }
+
+// depodan filtrelemenin sorgusu bu şekilde gelecek dinamik olarak
+
+/*
+[
+  {
+    $unwind: "$Variants",
+  },
+  {
+    $group: {
+      _id: null,
+      mainCategorys: {
+        $addToSet: {
+          title: "$Category.Kata1",
+          value: "$Category.Kata1",
+        },
+      },
+      subCategorys: {
+        $addToSet: {
+          title: "$Category.Kata3",
+          value: "$Category.Kata3",
+        },
+      },
+      colors: {
+        $addToSet: {
+          title: "$Variants.Colorname",
+          value: "$Variants.Colorname",
+        },
+      },
+    },
+  },
+  {
+    $addFields: {
+      stockExist: [
+        {
+          title: "Tümü",
+          value: "all",
+        },
+        {
+          title: "Stokta Var",
+          value: "on",
+        },
+        {
+          title: "Stokta Yok",
+          value: "off",
+        },
+      ],
+      merchantExist: [
+        {
+          title: "Tümü",
+          value: "all",
+        },
+        {
+          title: "Yüklenenler",
+          value: "on",
+        },
+        {
+          title: "Yüklenmeyenler",
+          value: "off",
+        },
+      ],
+    },
+  },
+  {
+    $unset: "_id",
+  },
+]
+
+*/

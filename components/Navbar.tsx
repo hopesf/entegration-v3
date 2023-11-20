@@ -4,11 +4,12 @@ import { ModeToggle } from "./ModeToggle";
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "./ui/menubar";
 import { useGlobal } from "@/context/GlobalContext";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { state, dispatch, selectedMerchantisExist, nullMerchantsMenu, selectedMerchantMenu, selectedMerchant } = useGlobal();
   const [isAnimating, setIsAnimating] = useState(false);
+  const router = useRouter();
 
   const current = usePathname();
   const checkCurrent = current.includes("/product");
@@ -57,9 +58,15 @@ export default function Navbar() {
   return (
     <div className="w-full flex items-center px-2 lg:px-4 py-1 border-b justify-between sticky top-0 z-20 bg-white dark:bg-black">
       <Menubar className="rounded-none border-none">
-        <Link href={"/"} className={`font-extrabold text-lg select-none cursor-pointer ${isAnimating && "rotate-vert-center"}`}>
+        <span
+          onClick={() => {
+            dispatch({ type: "notSelectMerchant" });
+            router.push("/");
+          }}
+          className={`font-extrabold text-lg select-none cursor-pointer ${isAnimating && "rotate-vert-center"}`}
+        >
           CZ
-        </Link>
+        </span>
 
         <div className="flex items-center w-[350px] lg:w-[800px] 2xl:w-[1200px] overflow-x-auto">
           <MenubarMenu>
@@ -74,7 +81,7 @@ export default function Navbar() {
                       {item.title}
                     </MenubarItem>
                   ) : (
-                    <Link href={item.href} key={index}>
+                    <Link href={item.href}>
                       <MenubarItem onClick={() => handleSelectMerchant(item.title)} disabled={item.disabled}>
                         {item.title}
                       </MenubarItem>

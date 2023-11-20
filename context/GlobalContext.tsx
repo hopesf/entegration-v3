@@ -8,12 +8,23 @@ import React, { createContext, useContext, ReactNode, useReducer } from "react";
 function globalReducer(state: typeof initialState, action: { type: string; payload: any }) {
   switch (action.type) {
     case "selectMerchant":
+      const merchants = state.merchants.map((merchant, i) => ({
+        ...merchant,
+        selected: merchant.merchant === action.payload.toLowerCase(),
+      }));
       return {
         ...state,
-        merchants: state.merchants.map((merchant) => ({
-          ...merchant,
-          selected: merchant.merchant === action.payload.toLowerCase(),
-        })),
+        merchants,
+      };
+
+    case "notSelectMerchant":
+      const notMerchants = state.merchants.map((merchant, i) => ({
+        ...merchant,
+        selected: false,
+      }));
+      return {
+        ...state,
+        merchants: notMerchants,
       };
     case "setPageLoader":
       return {

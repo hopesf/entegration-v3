@@ -6,6 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useGlobal } from "@/context/GlobalContext";
 import { firstCharToUpperCase } from "@/functions";
 
+import ReloadConfirmBtnComp from "./ReloadConfirmBtnComp";
+
 export default function ParameterSide() {
   const { selectedMerchant } = useGlobal();
 
@@ -87,7 +89,10 @@ export default function ParameterSide() {
     <div className="col-span-12 sm:col-span-6 2xl:col-span-3 space-y-8">
       <Card>
         <CardHeader>
-          <CardTitle>{selectedMerchant && firstCharToUpperCase(selectedMerchant)} Parametreleri</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>{selectedMerchant && firstCharToUpperCase(selectedMerchant)} Parametreleri</CardTitle>
+            <ReloadConfirmBtnComp reloadBtn={() => console.log("reload btn")} confirmBtn={() => console.log("confirm btn")} />
+          </div>
           <CardDescription>Ürünün Parametrelerini {selectedMerchant}'da seçin veya düzenleyin.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -97,17 +102,17 @@ export default function ParameterSide() {
                 <React.Fragment key={index}>
                   {parameter.type === "text" ? (
                     <div className="flex flex-col space-y-1.5">
-                      <Label htmlFor="name">{parameter.title}</Label>
+                      <Label>{parameter.title}</Label>
                       <Input placeholder={parameter.placeholder} />
                     </div>
                   ) : parameter.type === "number" ? (
                     <div className="flex flex-col space-y-1.5">
-                      <Label htmlFor="name">{parameter.title}</Label>
+                      <Label>{parameter.title}</Label>
                       <Input type="number" placeholder={parameter.placeholder} />
                     </div>
                   ) : parameter.type === "selectbox" ? (
                     <div className="flex flex-col space-y-1.5">
-                      <Label htmlFor="name">{parameter.title}</Label>
+                      <Label>{parameter.title}</Label>
                       <Select>
                         <SelectTrigger id="material">
                           <SelectValue placeholder={parameter.placeholder} />
@@ -123,7 +128,7 @@ export default function ParameterSide() {
               ))}
 
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="material">Deri Materyali</Label>
+                <Label>Deri Materyali</Label>
                 <Select>
                   <SelectTrigger id="material">
                     <SelectValue placeholder="Deri Materyal Seçimi" />

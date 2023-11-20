@@ -21,16 +21,16 @@ export default function LeftSide() {
           <form>
             <div className="grid w-full items-center gap-4 space-y-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Ürün Başlığı</Label>
+                <Label>Ürün Başlığı</Label>
                 <Input placeholder="Hakiki erkek deri ayakkabı" />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Ürün Fiyatı</Label>
+                <Label>Ürün Fiyatı</Label>
                 <Input type="number" placeholder="55" />
               </div>
 
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="material">Deri Materyali</Label>
+                <Label>Deri Materyali</Label>
                 <Select>
                   <SelectTrigger id="material">
                     <SelectValue placeholder="Deri Materyal Seçimi" />
@@ -43,7 +43,7 @@ export default function LeftSide() {
               </div>
 
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Ürün Açıklaması</Label>
+                <Label>Ürün Açıklaması</Label>
                 <Textarea
                   rows={5}
                   placeholder="Hakiki deri ayakkabılar firmamız tarafından üretilmekte olup, siz değerli müşterilerimizin hayatını kolaylaştırmayı amaçlamaktadır."

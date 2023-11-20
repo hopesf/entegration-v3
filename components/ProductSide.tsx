@@ -16,7 +16,10 @@ export default function ProductSide() {
           src="https://czbucket-cz.s3.eu-central-1.amazonaws.com/wp-content/uploads/2022/11/03024542/12888.jpg"
           width={800}
           height={800}
+          priority={true}
           className="rounded-tl-2xl rounded-br-2xl"
+          placeholder="blur"
+          blurDataURL="https://czbucket-cz.s3.eu-central-1.amazonaws.com/wp-content/uploads/2022/11/03024542/12888.jpg"
           alt="test"
         />
         <div className="flex w-full justify-between items-center px-5 pt-5">
@@ -71,7 +74,7 @@ export default function ProductSide() {
           </Select>
         </div>
       </div>
-      <div className="w-full grid gap-20 grid-cols-4 py-5">
+      <div className="w-full grid gap-20 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 py-5">
         {renderProductCard()}
         {renderProductCard()}
         {renderProductCard()}

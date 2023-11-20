@@ -12,8 +12,8 @@ export default function SidebarNav({ className, items, ...props }: SidebarNavPro
   const pathname = usePathname();
   return (
     <nav className={"flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-5"}>
-      {items.map((item) => (
-        <Link key={item.href} href={item.href} className={"hover:bg-transparent hover:underline items-start"}>
+      {items.map((item, i) => (
+        <Link key={i} href={item.href} className={"hover:bg-transparent hover:underline items-start"}>
           {item.title}
         </Link>
       ))}

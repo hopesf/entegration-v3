@@ -11,11 +11,10 @@ import ProductSide from "@/components/ProductSide";
 export default function MerchantPage({ params }: { params: { merchant: string } }) {
   const { dispatch, state } = useGlobal();
   const router = useRouter();
+  const merchant = params.merchant;
 
   useEffect(() => {
     dispatch({ type: "setPageLoader", payload: true });
-    const { merchant } = params;
-    console.log("Merchant:", merchant);
 
     const checkMerchant = state.merchants.find((el) => el.merchant === merchant);
     const checkDisabled = state.merchants.find((el) => el.merchant === merchant)?.disabled;
@@ -39,12 +38,12 @@ export default function MerchantPage({ params }: { params: { merchant: string } 
     <>
       <Navbar />
       <main className={`flex flex-col min-h-screen w-full`}>
-        <div className="p-6 w-full grid grid-cols-10 gap-5">
-          <div className="col-span-2 max-h-screen overflow-y-auto sticky top-12">
+        <div className="p-6 w-full grid grid-cols-6 xl:grid-cols-10 gap-5">
+          <div className="col-span-3 md:col-span-2 xl:col-span-2 max-h-screen overflow-y-auto sticky top-12">
             <FilterSide />
           </div>
 
-          <div className="col-span-8">
+          <div className="col-span-3 md:col-span-4 xl:col-span-8">
             <ProductSide />
           </div>
         </div>
