@@ -3,6 +3,7 @@
 import { useGlobal } from "@/context/GlobalContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+
 // components
 import FilterSide from "@/components/FilterSide";
 import Navbar from "@/components/Navbar";
