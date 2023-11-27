@@ -1,19 +1,14 @@
-import useSWR from "swr";
+import axios from "axios";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const baseUrl = "https://gateway.czlondon.com/entegration";
 
-const getUser = (id: number) => {
-  const { data, error, isLoading } = useSWR(`/api/user/${id}`, fetcher, { revalidateOnFocus: true });
-
-  return {
-    user: data,
-    isLoading,
-    isError: error,
-  };
+const getFilter = async () => {
+  const { data } = await axios.post(baseUrl + "/getFilter");
+  return data[0];
 };
 
-const api = {
-  getUser,
+const apiService = {
+  getFilter,
 };
 
-export default api;
+export default apiService;

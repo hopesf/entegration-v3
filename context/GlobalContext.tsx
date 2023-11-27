@@ -3,6 +3,7 @@
 import { MenubarShortcut } from "@/components/ui/menubar";
 import { ArchiveIcon, CogIcon } from "lucide-react";
 import React, { createContext, useContext, ReactNode, useReducer } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // Reducer fonksiyonu, state ve action alır, yeni bir state döner.
 function globalReducer(state: typeof initialState, action: { type: string; payload: any }) {
@@ -74,6 +75,7 @@ const initialState = {
       href: "/trendyolint",
     },
   ],
+  // data menuleri içerir
   data: [
     {
       title: "Bildirimler",
@@ -136,6 +138,8 @@ interface GlobalContextType {
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
+const queryClient = new QueryClient();
+
 export function GlobalProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(globalReducer, initialState);
 
@@ -153,7 +157,11 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
     selectedMerchantMenu,
   };
 
-  return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>
+    </QueryClientProvider>
+  );
 }
 
 export function useGlobal() {
