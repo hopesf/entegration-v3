@@ -26,6 +26,11 @@ export default function globalReducer(state: typeof initialState, action: { type
         ...state,
         pageLoader: action.payload,
       };
+    case "SET_FILTER_QUERY":
+      return {
+        ...state,
+        filterQuery: action.payload,
+      };
     default:
       return state;
   }

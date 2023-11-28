@@ -22,7 +22,7 @@ export default function ProductDetail() {
       dispatch({ type: "selectMerchant", payload: merchant });
     }
     return () => dispatch({ type: "setPageLoader", payload: false });
-  }, [merchant]);
+  }, [dispatch, merchant]);
 
   if (state.pageLoader)
     return (

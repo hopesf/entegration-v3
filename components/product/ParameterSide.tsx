@@ -93,7 +93,7 @@ export default function ParameterSide() {
             <CardTitle>{selectedMerchant && firstCharToUpperCase(selectedMerchant)} Parametreleri</CardTitle>
             <ReloadConfirmBtnComp reloadBtn={() => console.log("reload btn")} confirmBtn={() => console.log("confirm btn")} />
           </div>
-          <CardDescription>Ürünün Parametrelerini {selectedMerchant}'da seçin veya düzenleyin.</CardDescription>
+          <CardDescription>Ürünün Parametrelerini {selectedMerchant} da seçin veya düzenleyin.</CardDescription>
         </CardHeader>
         <CardContent>
           <form>

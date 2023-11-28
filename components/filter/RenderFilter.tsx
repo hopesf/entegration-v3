@@ -5,6 +5,7 @@ import FilterSideFnc from "@/functions/FilterSideFnc";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 import { FilterItem } from "../types";
+import { useGlobal } from "@/context/GlobalContext";
 
 interface RenderFilterProps {
   data: FilterItem[];
@@ -13,13 +14,14 @@ interface RenderFilterProps {
 }
 
 export default function RenderFilter({ data, sideTitle, queryName }: RenderFilterProps) {
+  const { state, dispatch } = useGlobal();
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
   const handleSelectFilter = (queryName: string, queryValue: string) => {
     const queryString = FilterSideFnc.createQueryString(queryName, queryValue, searchParams);
-    console.log(queryString);
+    dispatch({ type: "SET_FILTER_QUERY", payload: queryString });
     router.push(pathname + (queryString === "" ? "" : `?${queryString}`));
   };
 

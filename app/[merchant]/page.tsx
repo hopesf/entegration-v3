@@ -26,7 +26,7 @@ export default function MerchantPage({ params }: { params: { merchant: string } 
 
     dispatch({ type: "selectMerchant", payload: merchant });
     dispatch({ type: "setPageLoader", payload: false });
-  }, [dispatch, params]);
+  }, [dispatch, params, router, merchant, state.merchants]);
 
   if (state.pageLoader)
     return (

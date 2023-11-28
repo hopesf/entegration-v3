@@ -95,6 +95,7 @@ export const initialState = {
     },
   ],
   pageLoader: true,
+  filterQuery: "",
 };
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
