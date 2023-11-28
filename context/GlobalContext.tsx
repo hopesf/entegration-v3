@@ -1,43 +1,13 @@
 "use client";
 
-import { MenubarShortcut } from "@/components/ui/menubar";
-import { ArchiveIcon, CogIcon } from "lucide-react";
 import React, { createContext, useContext, ReactNode, useReducer } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ArchiveIcon, CogIcon } from "lucide-react";
+import { MenubarShortcut } from "@/components/ui/menubar";
+import { GlobalReducer } from "@/reducer";
+import { GlobalContextType } from "./types";
 
-// Reducer fonksiyonu, state ve action alır, yeni bir state döner.
-function globalReducer(state: typeof initialState, action: { type: string; payload: any }) {
-  switch (action.type) {
-    case "selectMerchant":
-      const merchants = state.merchants.map((merchant, i) => ({
-        ...merchant,
-        selected: merchant.merchant === action.payload.toLowerCase(),
-      }));
-      return {
-        ...state,
-        merchants,
-      };
-
-    case "notSelectMerchant":
-      const notMerchants = state.merchants.map((merchant, i) => ({
-        ...merchant,
-        selected: false,
-      }));
-      return {
-        ...state,
-        merchants: notMerchants,
-      };
-    case "setPageLoader":
-      return {
-        ...state,
-        pageLoader: action.payload,
-      };
-    default:
-      return state;
-  }
-}
-
-const initialState = {
+export const initialState = {
   merchants: [
     {
       title: "Ozon",
@@ -127,21 +97,11 @@ const initialState = {
   pageLoader: true,
 };
 
-interface GlobalContextType {
-  state: typeof initialState;
-  dispatch: React.Dispatch<any>;
-  selectedMerchant: string | undefined;
-  selectedMerchantisExist: boolean;
-  nullMerchantsMenu: typeof initialState.data;
-  selectedMerchantMenu: typeof initialState.data;
-}
-
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
-
 const queryClient = new QueryClient();
 
 export function GlobalProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(globalReducer, initialState);
+  const [state, dispatch] = useReducer(GlobalReducer, initialState);
 
   const selectedMerchantisExist = state.merchants.some((merchant) => merchant.selected === true);
   const selectedMerchant = state.merchants.find((x) => x.selected)?.merchant;
