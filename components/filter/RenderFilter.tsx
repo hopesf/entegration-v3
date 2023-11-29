@@ -14,7 +14,7 @@ interface RenderFilterProps {
 }
 
 export default function RenderFilter({ data, sideTitle, queryName }: RenderFilterProps) {
-  const { state, dispatch } = useGlobal();
+  const { dispatch } = useGlobal();
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -23,6 +23,7 @@ export default function RenderFilter({ data, sideTitle, queryName }: RenderFilte
     const queryString = FilterSideFnc.createQueryString(queryName, queryValue, searchParams);
     dispatch({ type: "SET_FILTER_QUERY", payload: queryString });
     router.push(pathname + (queryString === "" ? "" : `?${queryString}`));
+    // burada react-query kullanıyorum. ve filtreleme işlemine queryString parametresini gönderiyorum.
   };
 
   const sorted = data?.sort((a, b) => a.title?.localeCompare(b.title));
@@ -30,7 +31,7 @@ export default function RenderFilter({ data, sideTitle, queryName }: RenderFilte
   return (
     <div className="w-full">
       <Label>{sideTitle}</Label>
-      <div className="max-h-[200px] overflow-y-auto gap-1.5 grid max-w-sm pt-4 space-y-4 items-center">
+      <div className=" gap-1.5 grid max-w-sm py-4 space-y-4 items-center">
         {sorted?.map((item, i) => (
           <div className="flex items-center space-x-2 px-2 font-medium" key={i}>
             <Checkbox

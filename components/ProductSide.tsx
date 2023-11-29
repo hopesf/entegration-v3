@@ -54,7 +54,7 @@ export default function ProductSide() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full max-h-screen overflow-y-auto">
       <div className="border p-5 rounded w-full flex items-center justify-between">
         <div>
           <span className="text-lg font-bold">Ürünler</span>

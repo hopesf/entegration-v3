@@ -26,7 +26,7 @@ export default function MerchantPage({ params }: { params: { merchant: string } 
 
     dispatch({ type: "selectMerchant", payload: merchant });
     dispatch({ type: "setPageLoader", payload: false });
-  }, [dispatch, params, router, merchant, state.merchants]);
+  }, [dispatch, params]);
 
   if (state.pageLoader)
     return (
@@ -39,12 +39,12 @@ export default function MerchantPage({ params }: { params: { merchant: string } 
     <>
       <Navbar />
       <main className={`flex flex-col min-h-screen w-full`}>
-        <div className="p-6 w-full grid grid-cols-6 xl:grid-cols-10 gap-5">
-          <div className="col-span-3 md:col-span-2 xl:col-span-2 max-h-screen overflow-y-auto sticky top-12">
+        <div className="p-6 w-full grid grid-cols-6 xl:grid-cols-10 gap-10">
+          <div className="col-span-3 md:col-span-2 xl:col-span-2 max-h-screen overflow-y-auto">
             <FilterSide />
           </div>
 
-          <div className="col-span-3 md:col-span-4 xl:col-span-8">
+          <div className="col-span-3 md:col-span-4 xl:col-span-8 max-h-full">
             <ProductSide />
           </div>
         </div>
